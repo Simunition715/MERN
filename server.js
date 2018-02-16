@@ -4,7 +4,6 @@ var session = require('express-session');
 
 var app = express();
 
-app.use(express.static(__dirname + '/bower_components'));
 app.use(express.static(__dirname + '/client'));
 app.use(session({
 	secret: 'mnbvcxz',
@@ -13,6 +12,8 @@ app.use(session({
 	rolling: true
 }))
 app.use(bp.json());
+
+require('./server/config/routes.js')(app);
 
 app.listen(8000, function(){
 	console.log('Listening on port 8000...');
